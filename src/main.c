@@ -65,11 +65,23 @@ int main(void)
   GPIOA->OSPEEDR = GPIOA->OSPEEDR | (0xb11<<10);
   */
   //uloha2
-
+  /*
   GPIOA->MODER = GPIOA->MODER & ~(uint32_t)(0xb11<<26);
   GPIOA->OTYPER = GPIOA->OTYPER & ~(uint32_t)(0xb1<<13);
   GPIOA->PUPDR = GPIOA->PUPDR & ~(uint32_t)(0xb11<<26);
-
+	*/
+  //uloha 3
+  //nastavenie vystupu pre LED
+   GPIOA->MODER = GPIOA->MODER  | (0xb1<<10);
+   GPIOA->MODER = GPIOA->MODER  &  ~(uint32_t)(0xb1<<11);
+   GPIOA->OTYPER = GPIOA->MODER & ~(uint32_t)(0xb1<<5);
+   GPIOA->PUPDR = GPIOA->PUPDR  | (0xb1<<10);
+   GPIOA->PUPDR = GPIOA->PUPDR  & ~(uint32_t)(0xb1<<11);
+   GPIOA->OSPEEDR = GPIOA->OSPEEDR | (0xb11<<10);
+   //Nastavenie tlacidla
+   GPIOA->MODER = GPIOA->MODER & ~(uint32_t)(0xb11<<26);
+   GPIOA->OTYPER = GPIOA->OTYPER & ~(uint32_t)(0xb1<<13);
+   GPIOA->PUPDR = GPIOA->PUPDR & ~(uint32_t)(0xb11<<26);
 
   /**
   *  IMPORTANT NOTE!
@@ -113,10 +125,17 @@ int main(void)
 	  GPIOA->ODR = GPIOA->ODR ^ (0xb1<<5);
 	  for (i=0;i<500000;i++);
 	  */
+
 	  //Uloha 2
-
+	  /*
 	  BUTTON = !(GPIOA->IDR & (0xb1<<13));
+		*/
 
+	  //Uloha3
+	  GPIOA->ODR = GPIOA->ODR | (0xb1<<5);
+	  	for (i=0;i<500000;i++);
+	  	GPIOA->ODR = GPIOA->ODR & ~(uint32_t)(0xb1<<5);
+	  	for (i=0;i<500000;i++);
 
   }
 
