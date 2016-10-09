@@ -132,10 +132,15 @@ int main(void)
 		*/
 
 	  //Uloha3
-	  GPIOA->ODR = GPIOA->ODR | (0xb1<<5);
+	  //cast a
+	  /*GPIOA->ODR = GPIOA->ODR | (0xb1<<5);
 	  	for (i=0;i<500000;i++);
 	  	GPIOA->ODR = GPIOA->ODR & ~(uint32_t)(0xb1<<5);
 	  	for (i=0;i<500000;i++);
+		*/
+	  //cast b
+	  BUTTON = !(GPIOA->IDR & (0xb1<<13));
+
 
   }
 
