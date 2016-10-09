@@ -50,6 +50,10 @@ int main(void)
 {
   int i = 0;
   uint8_t BUTTON=0;
+  uint8_t BUTTON_akt=0;
+  uint8_t BUTTON_min=0;
+  uint8_t stlacene=0;
+  uint8_t j=0;
 
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
 
@@ -65,13 +69,15 @@ int main(void)
   GPIOA->OSPEEDR = GPIOA->OSPEEDR | (0xb11<<10);
   */
   //uloha2
-  /*
-  GPIOA->MODER = GPIOA->MODER & ~(uint32_t)(0xb11<<26);
-  GPIOA->OTYPER = GPIOA->OTYPER & ~(uint32_t)(0xb1<<13);
-  GPIOA->PUPDR = GPIOA->PUPDR & ~(uint32_t)(0xb11<<26);
-	*/
+
+  GPIOC->MODER = GPIOC->MODER & ~(uint32_t)(0xb11<<26);
+  GPIOC->OTYPER = GPIOC->OTYPER & ~(uint32_t)(0xb1<<13);
+  GPIOC->PUPDR = GPIOC->PUPDR & ~(uint32_t)(0xb11<<26);
+  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
+
   //uloha 3
   //nastavenie vystupu pre LED
+  /*
    GPIOA->MODER = GPIOA->MODER  | (0xb1<<10);
    GPIOA->MODER = GPIOA->MODER  &  ~(uint32_t)(0xb1<<11);
    GPIOA->OTYPER = GPIOA->MODER & ~(uint32_t)(0xb1<<5);
@@ -79,26 +85,10 @@ int main(void)
    GPIOA->PUPDR = GPIOA->PUPDR  & ~(uint32_t)(0xb1<<11);
    GPIOA->OSPEEDR = GPIOA->OSPEEDR | (0xb11<<10);
    //Nastavenie tlacidla
-   GPIOA->MODER = GPIOA->MODER & ~(uint32_t)(0xb11<<26);
-   GPIOA->OTYPER = GPIOA->OTYPER & ~(uint32_t)(0xb1<<13);
-   GPIOA->PUPDR = GPIOA->PUPDR & ~(uint32_t)(0xb11<<26);
-
-  /**
-  *  IMPORTANT NOTE!
-  *  See the <system_*.c> file and how/if the SystemInit() function updates 
-  *  SCB->VTOR register. Sometimes the symbol VECT_TAB_SRAM needs to be defined 
-  *  when building the project if code has been located to RAM and interrupts 
-  *  are used. Otherwise the interrupt table located in flash will be used.
-  *  E.g.  SCB->VTOR = 0x20000000;  
-  */
-
-  /**
-  *  At this stage the microcontroller clock setting is already configured,
-  *  this is done through SystemInit() function which is called from startup
-  *  file (startup_stm32l1xx_hd.s) before to branch to application main.
-  *  To reconfigure the default setting of SystemInit() function, refer to
-  *  system_stm32l1xx.c file
-  */
+   GPIOC->MODER = GPIOA->MODER & ~(uint32_t)(0xb11<<26);
+   GPIOC->OTYPER = GPIOA->OTYPER & ~(uint32_t)(0xb1<<13);
+   GPIOC->PUPDR = GPIOA->PUPDR & ~(uint32_t)(0xb11<<26);
+*/
 
   /* TODO - Add your application code here */
 
@@ -127,9 +117,9 @@ int main(void)
 	  */
 
 	  //Uloha 2
-	  /*
-	  BUTTON = !(GPIOA->IDR & (0xb1<<13));
-		*/
+
+	  BUTTON = !(GPIOC->IDR & (0xb1<<13));
+
 
 	  //Uloha3
 	  //cast a
@@ -139,7 +129,10 @@ int main(void)
 	  	for (i=0;i<500000;i++);
 		*/
 	  //cast b
-	  BUTTON = !(GPIOA->IDR & (0xb1<<13));
+	  /*
+	  BUTTON = !(GPIOC->IDR & (0xb1<<13));
+		*/
+	  //cast c
 
 
   }
