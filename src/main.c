@@ -61,7 +61,6 @@ int main(void)
 
   GPIOA->OSPEEDR = GPIOA->OSPEEDR | (0xb11<<10);
 
-  GPIOA->ODR = GPIOA->ODR | (0xb1<<5);
 
   /**
   *  IMPORTANT NOTE!
@@ -86,8 +85,27 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-	i++;
+	  //uloha 1a
+	/*  GPIOA->ODR = GPIOA->ODR | (0xb1<<5);
+	for (i=0;i<500000;i++);
+	GPIOA->ODR = GPIOA->ODR & ~(uint32_t)(0xb1<<5);
+	for (i=0;i<500000;i++);
+
+	 */
+	  //uloha 1b
+	  /*
+	   GPIOA->BSRRH = GPIOA->BSRRH | (0xb1<<5);
+	   	for (i=0;i<500000;i++);
+		GPIOA->BSRRL = GPIOA->BSRRL | (0xb1<<5);
+		for (i=0;i<500000;i++);
+		*/
+	  //uloha 1c
+	  /*
+	  GPIOA->ODR = GPIOA->ODR ^ (0xb1<<5);
+	  for (i=0;i<500000;i++);
+	  */
   }
+
   return 0;
 }
 
