@@ -49,6 +49,7 @@ SOFTWARE.
 int main(void)
 {
   int i = 0;
+  uint8_t BUTTON=0;
 
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
 
@@ -64,9 +65,11 @@ int main(void)
   GPIOA->OSPEEDR = GPIOA->OSPEEDR | (0xb11<<10);
   */
   //uloha2
+
   GPIOA->MODER = GPIOA->MODER & ~(uint32_t)(0xb11<<26);
   GPIOA->OTYPER = GPIOA->OTYPER & ~(uint32_t)(0xb1<<13);
   GPIOA->PUPDR = GPIOA->PUPDR & ~(uint32_t)(0xb11<<26);
+
 
   /**
   *  IMPORTANT NOTE!
@@ -110,6 +113,11 @@ int main(void)
 	  GPIOA->ODR = GPIOA->ODR ^ (0xb1<<5);
 	  for (i=0;i<500000;i++);
 	  */
+	  //Uloha 2
+
+	  BUTTON = !(GPIOA->IDR & (0xb1<<13));
+
+
   }
 
   return 0;
