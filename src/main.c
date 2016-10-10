@@ -66,14 +66,14 @@ int main(void)
   GPIOA->OSPEEDR = GPIOA->OSPEEDR | (0xb11<<10);
   */
   //Cv3 Uloha1
-  GPIO_InitTypeDef GPIOInitStruct;
+  /*GPIO_InitTypeDef GPIOInitStruct;
   GPIOInitStruct.GPIO_Mode = GPIO_Mode_OUT ;
   GPIOInitStruct.GPIO_OType = GPIO_OType_PP ;
   GPIOInitStruct.GPIO_Pin = GPIO_Pin_5 ;
   GPIOInitStruct.GPIO_PuPd = GPIO_PuPd_NOPULL;
   GPIOInitStruct.GPIO_Speed = GPIO_Speed_400KHz ;
   GPIO_Init(GPIOA,&GPIOInitStruct);
-
+*/
 
   //Cv2 uloha2
 /*
@@ -82,6 +82,14 @@ int main(void)
   GPIOC->PUPDR = GPIOC->PUPDR & ~(uint32_t)(0xb11<<26);
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
 */
+  //Cv3 Uloha2
+  GPIO_InitTypeDef GPIOInitStruct;
+  RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
+  GPIOInitStruct.GPIO_Mode = GPIO_Mode_IN;
+  GPIOInitStruct.GPIO_OType = GPIO_OType_PP;
+  GPIOInitStruct.GPIO_PuPd = GPIO_PuPd_NOPULL;
+  GPIO_Init(GPIOC,&GPIOInitStruct);
+
   //uloha 3
   //nastavenie vystupu pre LED
 /*
@@ -131,13 +139,16 @@ int main(void)
 	  for (i=0;i<500000;i++);
 	  */
 	  //Cv3 uloha 1b
-	  GPIO_ToggleBits(GPIOA,GPIO_Pin_5);
+	  /*GPIO_ToggleBits(GPIOA,GPIO_Pin_5);
 	  for (i=0;i<500000;i++);
+	  */
 
-	  //Uloha 2
+	  //Cv2 Uloha 2
 	  /*
 	  BUTTON = !(GPIOC->IDR & (0xb1<<13));
 	*/
+	  //Cv3 Uloha2
+	  BUTTON = GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_13);
 
 	  //Uloha3
 	  //cast a
@@ -159,6 +170,7 @@ int main(void)
 	  }
 */
 	  //cast c
+	  /*
 	 BUTTON = !(GPIOC->IDR & (0xb1<<13));
 	 if (BUTTON ^ stlacene)
 	 {
@@ -176,6 +188,7 @@ int main(void)
 	 {
 		 GPIOA->ODR = GPIOA->ODR ^ (0xb1<<5);
 	 }
+	 */
 
   }
 
