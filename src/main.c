@@ -49,11 +49,11 @@ SOFTWARE.
 int main(void)
 {
   int i = 0;
-  uint8_t BUTTON=0;
+  uint32_t BUTTON=0;
   uint8_t BUTTON_akt=0;
   uint8_t BUTTON_min=0;
   uint8_t stlacene=0;
-  uint8_t j=0;
+  int pocitadlo=0;
 
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
 
@@ -69,15 +69,15 @@ int main(void)
   GPIOA->OSPEEDR = GPIOA->OSPEEDR | (0xb11<<10);
   */
   //uloha2
-
+/*
   GPIOC->MODER = GPIOC->MODER & ~(uint32_t)(0xb11<<26);
   GPIOC->OTYPER = GPIOC->OTYPER & ~(uint32_t)(0xb1<<13);
   GPIOC->PUPDR = GPIOC->PUPDR & ~(uint32_t)(0xb11<<26);
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
-
+*/
   //uloha 3
   //nastavenie vystupu pre LED
-  /*
+
    GPIOA->MODER = GPIOA->MODER  | (0xb1<<10);
    GPIOA->MODER = GPIOA->MODER  &  ~(uint32_t)(0xb1<<11);
    GPIOA->OTYPER = GPIOA->MODER & ~(uint32_t)(0xb1<<5);
@@ -85,10 +85,10 @@ int main(void)
    GPIOA->PUPDR = GPIOA->PUPDR  & ~(uint32_t)(0xb1<<11);
    GPIOA->OSPEEDR = GPIOA->OSPEEDR | (0xb11<<10);
    //Nastavenie tlacidla
-   GPIOC->MODER = GPIOA->MODER & ~(uint32_t)(0xb11<<26);
-   GPIOC->OTYPER = GPIOA->OTYPER & ~(uint32_t)(0xb1<<13);
-   GPIOC->PUPDR = GPIOA->PUPDR & ~(uint32_t)(0xb11<<26);
-*/
+   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
+   GPIOC->MODER = GPIOC->MODER & ~(uint32_t)(0xb11<<26);
+   GPIOC->OTYPER = GPIOC->OTYPER & ~(uint32_t)(0xb1<<13);
+   GPIOC->PUPDR = GPIOC->PUPDR & ~(uint32_t)(0xb11<<26);
 
   /* TODO - Add your application code here */
 
@@ -117,9 +117,9 @@ int main(void)
 	  */
 
 	  //Uloha 2
-
+	  /*
 	  BUTTON = !(GPIOC->IDR & (0xb1<<13));
-
+	*/
 
 	  //Uloha3
 	  //cast a
@@ -129,13 +129,39 @@ int main(void)
 	  	for (i=0;i<500000;i++);
 		*/
 	  //cast b
-	  /*
-	  BUTTON = !(GPIOC->IDR & (0xb1<<13));
-		*/
-	  //cast c
 
+	  BUTTON = (GPIOC->IDR & (0xb1<<13));
+	  if (BUTTON == 0)
+	  {
+		  GPIOA->ODR = GPIOA->ODR | (0xb1<<5);
+	  }
+	  else
+	  {
+		  GPIOA->ODR = GPIOA->ODR & ~(uint32_t)(0xb1<<5);
+	  }
+
+	  //cast c
+	 /*BUTTON = (GPIOC->IDR & (0xb1<<13));
+	 BUTTON = !(BUTTON>>13);
+	 if (BUTTON ^ stlacene)
+	 {
+		 stlacene = BUTTON;
+		 pocitadlo = 0;
+	 }
+	 else
+	 {
+		 if (pocitadlo <=100)
+		 {
+		 pocitadlo ++;
+		 }
+	 }
+	 if (pocitadlo == 100)
+	 {
+		 GPIOA->ODR = GPIOA->ODR ^ (0xb1<<5);
+	 }*/
 
   }
+
 
   return 0;
 }
