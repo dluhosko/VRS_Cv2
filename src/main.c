@@ -148,8 +148,8 @@ int main(void)
 	  BUTTON = !(GPIOC->IDR & (0xb1<<13));
 	*/
 	  //Cv3 Uloha2
-	  BUTTON = GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_13);
 
+	  BUTTON = !GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_13);
 	  //Uloha3
 	  //cast a
 	  /*GPIOA->ODR = GPIOA->ODR | (0xb1<<5);
