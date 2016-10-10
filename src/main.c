@@ -57,18 +57,25 @@ int main(void)
 
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA, ENABLE);
 
-  /*uloha 1
+  /*Cv2 uloha 1
    GPIOA->MODER = GPIOA->MODER  | (0xb1<<10);
   GPIOA->MODER = GPIOA->MODER  &  ~(uint32_t)(0xb1<<11);
-
   GPIOA->OTYPER = GPIOA->MODER & ~(uint32_t)(0xb1<<5);
-
   GPIOA->PUPDR = GPIOA->PUPDR  | (0xb1<<10);
   GPIOA->PUPDR = GPIOA->PUPDR  & ~(uint32_t)(0xb1<<11);
-
   GPIOA->OSPEEDR = GPIOA->OSPEEDR | (0xb11<<10);
   */
-  //uloha2
+  //Cv3 Uloha1
+  GPIO_InitTypeDef GPIOInitStruct;
+  GPIOInitStruct.GPIO_Mode = GPIO_Mode_OUT ;
+  GPIOInitStruct.GPIO_OType = GPIO_OType_PP ;
+  GPIOInitStruct.GPIO_Pin = GPIO_Pin_5 ;
+  GPIOInitStruct.GPIO_PuPd = GPIO_PuPd_NOPULL;
+  GPIOInitStruct.GPIO_Speed = GPIO_Speed_400KHz ;
+  GPIO_Init(GPIOA,&GPIOInitStruct);
+
+
+  //Cv2 uloha2
 /*
   GPIOC->MODER = GPIOC->MODER & ~(uint32_t)(0xb11<<26);
   GPIOC->OTYPER = GPIOC->OTYPER & ~(uint32_t)(0xb1<<13);
@@ -77,44 +84,51 @@ int main(void)
 */
   //uloha 3
   //nastavenie vystupu pre LED
-
+/*
    GPIOA->MODER = GPIOA->MODER  | (0xb1<<10);
    GPIOA->MODER = GPIOA->MODER  &  ~(uint32_t)(0xb1<<11);
    GPIOA->OTYPER = GPIOA->MODER & ~(uint32_t)(0xb1<<5);
    GPIOA->PUPDR = GPIOA->PUPDR  | (0xb1<<10);
    GPIOA->PUPDR = GPIOA->PUPDR  & ~(uint32_t)(0xb1<<11);
    GPIOA->OSPEEDR = GPIOA->OSPEEDR | (0xb11<<10);
+   */
+
    //Nastavenie tlacidla
-   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
+  /* RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
    GPIOC->MODER = GPIOC->MODER & ~(uint32_t)(0xb11<<26);
    GPIOC->OTYPER = GPIOC->OTYPER & ~(uint32_t)(0xb1<<13);
    GPIOC->PUPDR = GPIOC->PUPDR & ~(uint32_t)(0xb11<<26);
-
+   */
   /* TODO - Add your application code here */
 
 
   /* Infinite loop */
   while (1)
   {
-	  //uloha 1a
+	  //Cv2 uloha 1a
 	/*  GPIOA->ODR = GPIOA->ODR | (0xb1<<5);
 	for (i=0;i<500000;i++);
 	GPIOA->ODR = GPIOA->ODR & ~(uint32_t)(0xb1<<5);
 	for (i=0;i<500000;i++);
-
 	 */
-	  //uloha 1b
+
+	  //Cv2 uloha 1b
 	  /*
 	   GPIOA->BSRRH = GPIOA->BSRRH | (0xb1<<5);
 	   	for (i=0;i<500000;i++);
 		GPIOA->BSRRL = GPIOA->BSRRL | (0xb1<<5);
 		for (i=0;i<500000;i++);
 		*/
-	  //uloha 1c
+	  //Cv2 uloha 1c
 	  /*
 	  GPIOA->ODR = GPIOA->ODR ^ (0xb1<<5);
 	  for (i=0;i<500000;i++);
 	  */
+	  //Cv3 uloha 1a
+	  GPIO_WriteBit(GPIOA,GPIO_Pin_5,Bit_SET);
+	  for (i=0;i<500000;i++);
+	  GPIO_WriteBit(GPIOA,GPIO_Pin_5,Bit_RESET);
+	  for (i=0;i<500000;i++);
 
 	  //Uloha 2
 	  /*
