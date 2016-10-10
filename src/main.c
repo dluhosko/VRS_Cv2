@@ -219,7 +219,7 @@ int main(void)
 	  for (i=0;i<500000;i++);
 	  */
 	  //cast b
-	  BUTTON = !GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_13);
+	 /* BUTTON = !GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_13);
 	  if (BUTTON == 1)
 	  {
 		  GPIO_WriteBit(GPIOA,GPIO_Pin_5,Bit_SET);
@@ -228,6 +228,25 @@ int main(void)
 	  {
 		  GPIO_WriteBit(GPIOA,GPIO_Pin_5,Bit_RESET);
 	  }
+	*/
+	  //cast c
+	  BUTTON = !GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_13);
+	  	 if (BUTTON ^ stlacene)
+	  	 {
+	  		 stlacene = BUTTON;
+	  		 pocitadlo = 0;
+	  	 }
+	  	 else
+	  	 {
+	  		 if ((pocitadlo <=100) && (stlacene ==1))
+	  		 {
+	  		 pocitadlo ++;
+	  		 }
+	  	 }
+	  	 if (pocitadlo == 100)
+	  	 {
+	  		GPIO_ToggleBits(GPIOA,GPIO_Pin_5);
+	  	 }
 
   }
 
