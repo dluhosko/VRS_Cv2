@@ -83,16 +83,18 @@ int main(void)
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
 */
   //Cv3 Uloha2
+  /*
   GPIO_InitTypeDef GPIOInitStruct;
   RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
   GPIOInitStruct.GPIO_Mode = GPIO_Mode_IN;
   GPIOInitStruct.GPIO_OType = GPIO_OType_PP;
   GPIOInitStruct.GPIO_PuPd = GPIO_PuPd_NOPULL;
   GPIO_Init(GPIOC,&GPIOInitStruct);
+  */
 
-  //uloha 3
+  //Cv2 uloha 3
   //nastavenie vystupu pre LED
-/*
+  /*
    GPIOA->MODER = GPIOA->MODER  | (0xb1<<10);
    GPIOA->MODER = GPIOA->MODER  &  ~(uint32_t)(0xb1<<11);
    GPIOA->OTYPER = GPIOA->MODER & ~(uint32_t)(0xb1<<5);
@@ -100,13 +102,30 @@ int main(void)
    GPIOA->PUPDR = GPIOA->PUPDR  & ~(uint32_t)(0xb1<<11);
    GPIOA->OSPEEDR = GPIOA->OSPEEDR | (0xb11<<10);
    */
-
    //Nastavenie tlacidla
   /* RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
    GPIOC->MODER = GPIOC->MODER & ~(uint32_t)(0xb11<<26);
    GPIOC->OTYPER = GPIOC->OTYPER & ~(uint32_t)(0xb1<<13);
    GPIOC->PUPDR = GPIOC->PUPDR & ~(uint32_t)(0xb11<<26);
    */
+  //Cv3 Uloha3
+  //Nastavenie pre LED
+  GPIO_InitTypeDef GPIOInitStruct;
+  GPIOInitStruct.GPIO_Mode = GPIO_Mode_OUT ;
+  GPIOInitStruct.GPIO_OType = GPIO_OType_PP ;
+  GPIOInitStruct.GPIO_Pin = GPIO_Pin_5 ;
+  GPIOInitStruct.GPIO_PuPd = GPIO_PuPd_NOPULL;
+  GPIOInitStruct.GPIO_Speed = GPIO_Speed_400KHz ;
+  GPIO_Init(GPIOA,&GPIOInitStruct);
+  //Nastavenie tlacitka
+  	GPIO_InitTypeDef GPIOInitStruct1;
+    RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOC, ENABLE);
+    GPIOInitStruct1.GPIO_Mode = GPIO_Mode_IN;
+    GPIOInitStruct1.GPIO_OType = GPIO_OType_PP;
+    GPIOInitStruct1.GPIO_PuPd = GPIO_PuPd_NOPULL;
+    GPIO_Init(GPIOC,&GPIOInitStruct1);
+
+
   /* TODO - Add your application code here */
 
 
@@ -148,9 +167,11 @@ int main(void)
 	  BUTTON = !(GPIOC->IDR & (0xb1<<13));
 	*/
 	  //Cv3 Uloha2
-
+	  /*
 	  BUTTON = !GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_13);
-	  //Uloha3
+	  */
+
+	  //Cv2 Uloha3
 	  //cast a
 	  /*GPIOA->ODR = GPIOA->ODR | (0xb1<<5);
 	  	for (i=0;i<500000;i++);
@@ -158,7 +179,7 @@ int main(void)
 	  	for (i=0;i<500000;i++);
 		*/
 	  //cast b
-/*
+	  /*
 	  BUTTON = (GPIOC->IDR & (0xb1<<13));
 	  if (BUTTON == 0)
 	  {
@@ -168,7 +189,7 @@ int main(void)
 	  {
 		  GPIOA->ODR = GPIOA->ODR & ~(uint32_t)(0xb1<<5);
 	  }
-*/
+ 	 */
 	  //cast c
 	  /*
 	 BUTTON = !(GPIOC->IDR & (0xb1<<13));
@@ -189,6 +210,12 @@ int main(void)
 		 GPIOA->ODR = GPIOA->ODR ^ (0xb1<<5);
 	 }
 	 */
+	  //Cv3 Uloha3
+	  //cast a
+	  GPIO_WriteBit(GPIOA,GPIO_Pin_5,Bit_SET);
+	  for (i=0;i<500000;i++);
+	  GPIO_WriteBit(GPIOA,GPIO_Pin_5,Bit_RESET);
+	  for (i=0;i<500000;i++);
 
   }
 
