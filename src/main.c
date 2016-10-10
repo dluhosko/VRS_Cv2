@@ -212,10 +212,22 @@ int main(void)
 	 */
 	  //Cv3 Uloha3
 	  //cast a
+	  /*
 	  GPIO_WriteBit(GPIOA,GPIO_Pin_5,Bit_SET);
 	  for (i=0;i<500000;i++);
 	  GPIO_WriteBit(GPIOA,GPIO_Pin_5,Bit_RESET);
 	  for (i=0;i<500000;i++);
+	  */
+	  //cast b
+	  BUTTON = !GPIO_ReadInputDataBit(GPIOC,GPIO_Pin_13);
+	  if (BUTTON == 1)
+	  {
+		  GPIO_WriteBit(GPIOA,GPIO_Pin_5,Bit_SET);
+	  }
+	  else
+	  {
+		  GPIO_WriteBit(GPIOA,GPIO_Pin_5,Bit_RESET);
+	  }
 
   }
 
