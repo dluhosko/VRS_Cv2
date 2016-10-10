@@ -125,9 +125,13 @@ int main(void)
 	  for (i=0;i<500000;i++);
 	  */
 	  //Cv3 uloha 1a
-	  GPIO_WriteBit(GPIOA,GPIO_Pin_5,Bit_SET);
+	  /*GPIO_WriteBit(GPIOA,GPIO_Pin_5,Bit_SET);
 	  for (i=0;i<500000;i++);
 	  GPIO_WriteBit(GPIOA,GPIO_Pin_5,Bit_RESET);
+	  for (i=0;i<500000;i++);
+	  */
+	  //Cv3 uloha 1b
+	  GPIO_ToggleBits(GPIOA,GPIO_Pin_5);
 	  for (i=0;i<500000;i++);
 
 	  //Uloha 2
