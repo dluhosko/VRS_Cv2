@@ -129,7 +129,7 @@ int main(void)
 	  	for (i=0;i<500000;i++);
 		*/
 	  //cast b
-
+/*
 	  BUTTON = (GPIOC->IDR & (0xb1<<13));
 	  if (BUTTON == 0)
 	  {
@@ -139,10 +139,9 @@ int main(void)
 	  {
 		  GPIOA->ODR = GPIOA->ODR & ~(uint32_t)(0xb1<<5);
 	  }
-
+*/
 	  //cast c
-	 /*BUTTON = (GPIOC->IDR & (0xb1<<13));
-	 BUTTON = !(BUTTON>>13);
+	 BUTTON = !(GPIOC->IDR & (0xb1<<13));
 	 if (BUTTON ^ stlacene)
 	 {
 		 stlacene = BUTTON;
@@ -150,7 +149,7 @@ int main(void)
 	 }
 	 else
 	 {
-		 if (pocitadlo <=100)
+		 if ((pocitadlo <=100) && (stlacene ==1))
 		 {
 		 pocitadlo ++;
 		 }
@@ -158,7 +157,7 @@ int main(void)
 	 if (pocitadlo == 100)
 	 {
 		 GPIOA->ODR = GPIOA->ODR ^ (0xb1<<5);
-	 }*/
+	 }
 
   }
 
